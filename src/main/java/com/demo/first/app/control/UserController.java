@@ -4,6 +4,7 @@ package com.demo.first.app.control;
 import com.demo.first.app.model.User;
 import com.demo.first.app.service.UserService;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,15 +15,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
+
+@EnableJpaRepositories
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
 
-    private UserService userService=new UserService();
+    private UserService userService;
 
 //    private Map<Integer,User> userDb=new HashMap<>();
     public UserController(UserService userService) {
+
         this.userService = userService;
     }
 
@@ -164,6 +168,7 @@ public class UserController {
     //RequestHeader Concept Logic Used
     @GetMapping("/Info")
     public String getInfo(@RequestHeader("User-Agent") String userAgent){
+
         return "User Agent: "+ userAgent;
     }
 
